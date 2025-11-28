@@ -1,4 +1,9 @@
 ##############################
+# Omitir configuraciones sensibles
+##############################
+src/main/resources/application.properties
+
+##############################
 # Compilación
 ##############################
 /target/

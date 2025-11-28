@@ -1,4 +1,4 @@
-package mx.com.ago.core.notificaciones.data;
+package mx.com.ago.notificaciones.data;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

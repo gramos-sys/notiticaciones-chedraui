@@ -1,4 +1,4 @@
-package mx.com.ago.core.notificaciones.service;
+package mx.com.ago.notificaciones.service;
 
 public interface INotificacionesService {
 

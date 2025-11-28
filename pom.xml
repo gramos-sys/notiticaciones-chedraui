@@ -9,21 +9,24 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>mx.com.ago</groupId>
-	<artifactId>notifaciones-core</artifactId>
+	<artifactId>notifaciones</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>notifaciones-core</name>
+	<name>notifaciones</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
 		<!-- The main class to start by executing "java -jar" -->
-      <start-class>mx.com.ago.notifaciones.core.NotifacionesCoreApplication</start-class>
+      <start-class>mx.com.ago.notifaciones.NotifacionesApplication</start-class>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>

@@ -1,4 +1,4 @@
-package mx.com.ago.core.notificaciones.connection;
+package mx.com.ago.notificaciones.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

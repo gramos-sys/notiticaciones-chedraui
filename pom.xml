@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="https://maven.apache.org/POM/4.0.0" xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="https://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.18</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>mx.com.ago</groupId>
+	<artifactId>notifaciones-core</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>notifaciones-core</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>1.8</java.version>
+		<!-- The main class to start by executing "java -jar" -->
+      <start-class>mx.com.ago.notifaciones.core.NotifacionesCoreApplication</start-class>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+	      	<artifactId>gson</artifactId>
+	      	<version>2.8.6</version>
+	      	<type>jar</type>
+	   </dependency>
+	   <dependency>
+			<groupId>javax.ws.rs</groupId>
+	      	<artifactId>javax.ws.rs-api</artifactId>
+	      	<version>2.0</version>
+	   </dependency>
+	   <dependency>
+	      	<groupId>org.jboss.resteasy</groupId>
+	      	<artifactId>resteasy-client</artifactId>
+	      	<version>3.1.0.Final</version>
+	   </dependency>
+	   <dependency>
+	      	<groupId>javax.json</groupId>
+	      	<artifactId>javax.json-api</artifactId>
+	      	<version>1.1.4</version>
+	   </dependency>
+	   <dependency>
+	      	<groupId>org.json</groupId>
+	      	<artifactId>json</artifactId>
+	      	<version>20180130</version>
+	      	<type>jar</type>
+	   </dependency>
+	   <dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<scope>runtime</scope>
+	   </dependency>
+	   <dependency>
+	   		<groupId>org.springframework.boot</groupId>
+		   	<artifactId>spring-boot-configuration-processor</artifactId>
+		   	<optional>true</optional>
+	   </dependency>
+	   
+	   <dependency>
+        <groupId>org.glassfish.jersey.core</groupId>
+        <artifactId>jersey-client</artifactId>
+        <version>2.35</version> <!-- Verifica que esta sea la versión que deseas usar -->
+	    </dependency>
+	   <dependency>
+	    <groupId>org.glassfish.jersey.inject</groupId>
+        <artifactId>jersey-hk2</artifactId>
+        <version>2.35</version>
+	    </dependency>
+	    
+	    <!-- Jackson Core -->
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-core</artifactId>
+	        <version>2.15.0</version>  <!-- Usa la última versión disponible -->
+	    </dependency>
+	    <!-- Jackson Databind -->
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-databind</artifactId>
+	        <version>2.15.0</version>
+	    </dependency>
+	    
+	  	<dependency>
+	        <groupId>org.apache.poi</groupId>
+	        <artifactId>poi-ooxml</artifactId>
+	        <version>5.2.3</version>
+    	</dependency>
+	   
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+					</image>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

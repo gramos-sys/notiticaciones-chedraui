@@ -1,0 +1,90 @@
+##############################
+# Compilación
+##############################
+/target/
+!/src/main/resources/
+/bin/
+build/
+
+##############################
+# IDE: Eclipse/STS
+##############################
+.classpath
+.project
+.settings/
+.springBeans
+
+##############################
+# IDE: IntelliJ IDEA
+##############################
+*.iml
+.idea/
+out/
+
+##############################
+# IDE: VS Code
+##############################
+.vscode/
+
+##############################
+# Sistema Operativo
+##############################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+##############################
+# Linux
+*~
+.cache/
+
+##############################
+# Logs y temporales
+##############################
+*.log
+logs/
+log/
+*.tmp
+*.swp
+*.bak
+
+##############################
+# Archivos de empaquetado
+##############################
+*.war
+*.ear
+*.jar
+*.zip
+*.tar.gz
+
+##############################
+# Coverage y test
+##############################
+/test-output/
+/surefire-reports/
+/jacoco.exec
+/coverage/
+
+##############################
+# Archivos sensibles (credenciales)
+##############################
+application-local.properties
+application-local.yml
+*.env
+*.secret
+*.keystore
+*.pem
+*.key
+
+##############################
+# Maven / Gradle
+##############################
+.mvn/timing.properties
+.gradle/
+

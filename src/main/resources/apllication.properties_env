@@ -1,12 +1,12 @@
 #################################################################
 # 1.- Renombrar este archivo a apllication.properties           #
-# 2.- Configruar los campos restantes de la de BD Operativa     #
-# 3.- Eliminar este bloque de comentarios                       #
+# 2.- Configurar los campos restantes de la de BD Operativa     #
+# 3.- Eliminar este bloque de comentarios (Linea del 1 al 6)    #
 #################################################################
 
 # Configuracion BD Principal (Local)
-spring.datasource.url=jdbc:sqlserver://[ip]:[puerto];databaseName=AgoOper_RIMG;encrypt=false
-spring.datasource.username=
-spring.datasource.password=
+spring.datasource.url=jdbc:sqlserver://[ip]:[puerto];databaseName=BD_Operativa;encrypt=false
+spring.datasource.username=TU_USUARIO 
+spring.datasource.password=TU_PASSWORD
 spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
 logging.level.com.miapp=INFO

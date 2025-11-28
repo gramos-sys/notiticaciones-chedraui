@@ -6,5 +6,5 @@ import lombok.Data;
 public class TokenMovil {
     
     private String token;
-    private String idUsuario;
+    private String so;
 }

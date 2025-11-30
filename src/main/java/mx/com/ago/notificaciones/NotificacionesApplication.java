@@ -7,23 +7,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import mx.com.ago.notificaciones.service.impl.NotificacionesService;
+import mx.com.ago.notificaciones.service.INotificacionesService;
 
 @SpringBootApplication
-public class NotifacionesApplication {
+public class NotificacionesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NotifacionesApplication.class, args);
+		SpringApplication.run(NotificacionesApplication.class, args);
 			
 	}
-
-//    @Bean
-//    CommandLineRunner start(MueblesService mueblesService) {
-//		return args -> {Stream.of(mueblesService.clasificarMuebles());};
-//	}	
 	
 	@Bean
-    CommandLineRunner start(NotificacionesService notificacionesService) {
+    CommandLineRunner start(INotificacionesService notificacionesService) {
 		return args -> {Stream.of(notificacionesService.generarNotificaciones());};
 	}	
 }

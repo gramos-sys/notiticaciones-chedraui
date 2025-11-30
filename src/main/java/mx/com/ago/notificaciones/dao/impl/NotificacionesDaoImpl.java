@@ -8,11 +8,11 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import mx.com.ago.notificaciones.dao.INotifiacionesDao;
+import mx.com.ago.notificaciones.dao.INotificacionesDao;
 import mx.com.ago.notificaciones.data.TokenMovil;
 
-@Repository("notificacionesDao")
-public class NotificacionesDaoImpl implements INotifiacionesDao {
+@Repository
+public class NotificacionesDaoImpl implements INotificacionesDao {
 
     private static final org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(NotificacionesDaoImpl.class);
 

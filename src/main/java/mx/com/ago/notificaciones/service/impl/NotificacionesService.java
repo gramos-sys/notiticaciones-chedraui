@@ -4,7 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mx.com.ago.notificaciones.dao.INotifiacionesDao;
+import mx.com.ago.notificaciones.dao.INotificacionesDao;
 import mx.com.ago.notificaciones.data.TokenMovil;
 import mx.com.ago.notificaciones.service.INotificacionesService;
 
@@ -14,7 +14,7 @@ public class NotificacionesService implements INotificacionesService{
 	private static final Logger logger = Logger.getLogger(NotificacionesService.class);
 
 	@Autowired 
-	private INotifiacionesDao notificacionesDao;	
+	private INotificacionesDao notificacionesDao;	
 	
 	@Override
 	public Boolean generarNotificaciones() throws Exception {
@@ -25,9 +25,9 @@ public class NotificacionesService implements INotificacionesService{
 		System.out.println("Hola mundo...");
 
 		TokenMovil token = notificacionesDao.consultarMovilUsuario("gramos");
-		System.out.println("Token: " + token.toString());
-
-		
+		System.out.println("Token: " + token.getToken());
+		System.out.println("SO: " + token.getSo());
+		System.out.println(token.toString());
 	    
 	    return true;
 	}

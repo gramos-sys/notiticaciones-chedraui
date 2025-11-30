@@ -18,6 +18,7 @@ build/
 .project
 .settings/
 .springBeans
+.factorypath
 
 ##############################
 # IDE: IntelliJ IDEA

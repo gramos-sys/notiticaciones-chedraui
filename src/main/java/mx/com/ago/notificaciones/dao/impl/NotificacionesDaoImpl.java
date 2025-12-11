@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import mx.com.ago.notificaciones.dao.INotificacionesDao;
-import mx.com.ago.notificaciones.data.TokenMovil;
+import mx.com.ago.notificaciones.data.DatosNotificacion;
 
 @Repository
 public class NotificacionesDaoImpl implements INotificacionesDao {
@@ -20,18 +20,62 @@ public class NotificacionesDaoImpl implements INotificacionesDao {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public TokenMovil consultarMovilUsuario(String idUsuario) {
+    public List<DatosNotificacion> consultarMovilUsuario() {
         String claseMetodo = "NotificacionesDaoImpl/consultarMovilUsuario: ";
         logger.info(claseMetodo + "inicio..."); 
 
-        String sql = "[Notificacion].[not_spS_ConsultaTokenMovil] ?";
-        List<TokenMovil> resultadosSQL = new ArrayList<>();
+        String sql = "[Notificacion].[not_spS_ObtenerUsuariosNotificacion]";
+        List<DatosNotificacion> resultadosSQL = new ArrayList<>();
 
-        logger.info("CallableStatement " + claseMetodo + sql +" " + idUsuario);
+
+        logger.info("CallableStatement " + claseMetodo + sql);
+        resultadosSQL = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(DatosNotificacion.class));
+
+        return resultadosSQL;
+    }
+
+    @Override
+    public Integer registrarNotificacion(DatosNotificacion datosNotificacion) {
+        String claseMetodo = "NotificacionesDaoImpl/registrarNotificacion: ";
+        logger.info(claseMetodo + "inicio..."); 
+
+        String sql = "[Notificacion].[not_spI_MensajeNotificacion] ?, ?";
+
+        Integer idNotificacion;
+
+        logger.info("CallableStatement " + claseMetodo + sql + "' " + datosNotificacion.getIdUsuario() 
+                                                             + ", " + datosNotificacion.getIdTienda());
+
+        idNotificacion = jdbcTemplate.queryForObject(
+            sql,
+            Integer.class,
+            datosNotificacion.getIdUsuario(),
+            datosNotificacion.getIdTienda()
+        );
+
+        return idNotificacion;
+    }
+
+    @Override
+    public void actualizarEstadoNotificacion(Integer idNotificacion, Boolean error, String observaciones) {
         
-        // Implementación de la lógica para consultar el móvil del usuario
-        resultadosSQL = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(TokenMovil.class),new Object[]{idUsuario});
+         String claseMetodo = "NotificacionesDaoImpl/actualizarEstadoNotificacion: ";
+        logger.info(claseMetodo + "inicio..."); 
 
-        return resultadosSQL.isEmpty() ? null : resultadosSQL.get(0); 
+        String sql = "[Notificacion].[not_spU_ReportarNotificacion] ?, ?, ?";
+        
+        logger.info("CallableStatement " + claseMetodo + sql + " " + idNotificacion
+                                                             + ", " + error  
+                                                             + ", '" + observaciones + "'");
+
+        jdbcTemplate.queryForObject(
+            sql,
+            Integer.class,
+            idNotificacion,
+            error,
+            observaciones
+        );
+
+        return;
     }
 }

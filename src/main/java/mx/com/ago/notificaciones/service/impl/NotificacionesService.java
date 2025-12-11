@@ -1,11 +1,17 @@
 package mx.com.ago.notificaciones.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
+
 import mx.com.ago.notificaciones.dao.INotificacionesDao;
-import mx.com.ago.notificaciones.data.TokenMovil;
+import mx.com.ago.notificaciones.data.DatosNotificacion;
 import mx.com.ago.notificaciones.service.INotificacionesService;
 
 @Service
@@ -15,20 +21,45 @@ public class NotificacionesService implements INotificacionesService{
 
 	@Autowired 
 	private INotificacionesDao notificacionesDao;	
+
+	@Autowired
+	private NotificacionMasivaService notificacionMasivaService;
 	
 	@Override
 	public Boolean generarNotificaciones() throws Exception {
 
-		String claseMetodo = "Notificaciones/generarNotificaciones: ";
-		logger.info(claseMetodo + "inicio...");
+		 String claseMetodo = "Notificaciones/generarNotificaciones: ";
+		 logger.info(claseMetodo + "inicio...");
 
-		System.out.println("Hola mundo...");
+		List<DatosNotificacion> notifaciones = notificacionesDao.consultarMovilUsuario();
+		List<Message> mensajes = new ArrayList<>();
 
-		TokenMovil token = notificacionesDao.consultarMovilUsuario("gramos");
-		System.out.println("Token: " + token.getToken());
-		System.out.println("SO: " + token.getSo());
-		System.out.println(token.toString());
-	    
+		for (DatosNotificacion n : notifaciones) {
+
+			n.setIdNotificacion(notificacionesDao.registrarNotificacion(n));
+
+			String cuerpo =
+				"🟢 ➕ " + n.getProductosNuevos() + " Productos nuevos\n" +
+				"🔴 ➖ " + n.getPurgados() + " Productos purgados";
+
+			mensajes.add(
+				Message.builder()
+					.setToken(n.getToken())
+					.setNotification(
+						Notification.builder()
+							.setTitle("Resumen de productos tienda " + n.getTienda())
+							.setBody(cuerpo)
+							.build()
+					)
+					.putData("vista", "NAVIGATE_TO_CATALOGOS")
+					.putData("idTienda", n.getIdTienda().toString())
+					.putData("idNotificacion",n.getIdNotificacion().toString())
+					.build()
+			);
+		}
+
+		notificacionMasivaService.enviarNotificacionesMasivas(mensajes);
+		
 	    return true;
 	}
 }

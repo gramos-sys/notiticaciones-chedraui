@@ -73,13 +73,13 @@
 			<version>20180130</version>
 		</dependency>
 		<!-- JSON-P javax.json (se mantiene, no conflictúa con Jackson ni Gson) -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>javax.json</groupId>
 			<artifactId>javax.json-api</artifactId>
 			<version>1.1.4</version>
-		</dependency>
+		</dependency> -->
 		<!-- Jersey Client (cliente REST) -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
 			<version>2.35</version>
@@ -88,13 +88,13 @@
 			<groupId>org.glassfish.jersey.inject</groupId>
 			<artifactId>jersey-hk2</artifactId>
 			<version>2.35</version>
-		</dependency>
+		</dependency> -->
 		<!-- Jackson (usado por Spring + POJOs + JSON binding) -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
 			<version>2.15.0</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>

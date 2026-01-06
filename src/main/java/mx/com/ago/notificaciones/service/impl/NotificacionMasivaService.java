@@ -81,7 +81,7 @@ public class NotificacionMasivaService {
                                     ", Detalles: " + fme.getMessagingErrorCode());
                         } else {
                             logger.error("Mensaje # " + index + " falló con excepción genérica", e);
-                        }
+                        } 
                     } else {
                         logger.info("Mensaje #" + index + " enviado exitosamente.");
                     }

@@ -1,6 +1,3 @@
-
-  
-
 # 📦 Proyecto de Notificaciones — Java Spring Boot
 
   
@@ -11,115 +8,141 @@ El archivo `application.properties` no se incluye en el repositorio por razones 
 
 Sigue las instrucciones de este documento para configurar tu entorno correctamente.
 
-  
-
 ---
-
-  
-
 # 🚀 Requerimientos
 
-  
-
-- Java **1.8+**
-
+- Java JDK **1.8+**
+- VS Code:
+    - Extension Pack for Java (oficial)
+    - Spring Boot Extension Pack (imprescindible)
+    - Lombok Annotations Support
+   
 - Maven **3.6+**
-
-- SQL Server (acceso a BD operativa)
-
+- SQL Server (acceso a BD histórica)
 - Archivo `application.properties` configurado (ver sección siguiente)
 
-  
-
 ---
+# 🔧 Configuraciones del Proyecto
+### **1. Configurar archivo `application.properties`**
 
-  
+El archivo `application.properties`  **no se incluye** en el repositorio *(por razones de seguridad)*, en su lugar existe una plantilla llamada: `application.properties_env`
 
-# 🔧 Configuración del archivo `application.properties`
-
-  
-
-El archivo `application.properties`  **no se incluye** en el repositorio.
-
-En su lugar, existe una plantilla llamada:
-
-  
-
-src/main/resources/application.properties_env
-
-  
-
-## ✅ Pasos para configurarlo
-
-### **1. Renombrar el archivo**
-
-Cambia:
+Editar el nombre de archivo:
 
 `application.properties_env`
-
-por:
-
+a:
 `application.properties`
-
-  
 
 ### **2. Editar los parámetros de conexión**
 
-Dentro del archivo renombrado configura los valores reales según tu entorno:
+Dentro del archivo renombrado configura los valores la BD Historica, según tu entorno:
 
 ```properties
-
-spring.datasource.url=jdbc:sqlserver://[ip]:[puerto];databaseName=BD_Operativa;encrypt=false
-
+# Configuracion BD Histoica
+spring.datasource.url=jdbc:sqlserver://[ip]:[puerto];databaseName=BD_Historica;encrypt=false
 spring.datasource.username=TU_USUARIO
-
 spring.datasource.password=TU_PASSWORD
-
 spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
-
 logging.level.com.miapp=INFO
 
+# Configuracion Firebase mensajes push
+firebase.credentials.path=file:C:/inetpub/google-keys/rich-service-account.json
 ```
-
-  
-
 ⚠️ **Importante:** reemplaza `[ip]` y `[puerto]` con los valores de la BD Operativa.
 
-  
+---
+# ▶️ Cómo ejecutar el proyecto
+Una vez configurado el archivo application.properties y teniendo instalados los requerimientos, existen dos formas recomendadas para ejecutar esta aplicación Spring Boot.
 
+### 🚀 Opción 1: Ejecutar desde VS Code (recomendado)
+
+1.- Abre la carpeta del proyecto en VS Code.
+
+2.- Verifica que las extensiones de Java y Spring Boot estén activas.
+
+3.- Abre el panel lateral: ```Sprin Dashboard```
+
+4.- VS Code detectará automáticamente tu aplicación: ```notificaciones — NotificacionesApplication```
+
+5.- Haz clic en Run para iniciar la aplicación.
+
+Durante la ejecución verás:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logs en la terminal
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mensajes de Spring Boot levantando el contexto
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Errores de configuración si faltan valores en application.properties
+
+
+### 🚀 Opción 2: Ejecutar desde consola con Maven
+Abrir la terminal en la raiz de proyecto y ejecutar el comando: ```mvn spring-boot:run```
+
+### 🧪 Verificar que la aplicación arrancó
+Si la aplicación levantó correctamente verás algo como:
+```
+Started NotificacionesApplication in 5.628 seconds
+Tomcat started on port(s): 8080
+```
+El servicio está disponible en el puerto 8080 (o el que configures).
+
+---
+# 📌 Construir el JAR ejecutable
+Abrir la terminal en la raiz de proyecto y ejecutar el comando: 
+```
+mvn clean package
+```
+
+El JAR se generará en:
+```
+target/notificaciones-0.1.jar
+```
+Se puede ejecutar el JAR generado con la instrucción;
+```
+java -jar target/notificaciones-0.1.jar
+```
+---
 # 📁 Estructura principal del proyecto
-
-  
-
 La estructura base del proyecto Spring Boot es la siguiente:
 
 ```properties
 
 src/
-└── main/
-    └── java/
-        └── mx/
-            └── com/
-                └── ago/
-                    └── notificaciones/
-                        ├── NotificacionesApplication.java     # Clase principal (Spring Boot)
-                        ├── connection/
-                        │   └── ConnectionDB.java               # Manejo de conexión a SQL Server
-                        ├── dao/
-                        │   ├── INotificacionesDao.java         # Interfaz DAO
-                        │   └── impl/
-                        │       └── NotificacionesDaoImpl.java  # Implementación del DAO
-                        ├── data/
-                        │   └── TokenMovil.java                 # Modelo de datos / entidad
-                        ├── exception/
-                        │   └── ... (clases de manejo de excepciones)
-                        ├── restclient/
-                        │   └── ... (clases para consumo de APIs externas con Jersey)
-                        ├── service/
-                        │   ├── INotificacionesService.java     # Interfaz del servicio
-                        │   └── impl/
-                        │       └── NotificacionesService.java  # Implementación del servicio
-                        └── utils/
-                            └── ... (clases utilitarias)
+ └── main/
+     └── java/
+         └── mx/
+             └── com/
+                 └── ago/
+                     └── notificaciones/
+                         ├── 📌 NotificacionesApplication.java      # Clase principal (arranque)
+                         │
+                         ├── 🗄️ connection/
+                         │   └── 🔌 ConnectionDB.java               # Conexión a SQL Server
+                         │
+                         ├── 📂 dao/
+                         │   ├── 📝 INotificacionesDao.java         # Interfaz DAO
+                         │   └── 📦 impl/
+                         │       └── 🧩 NotificacionesDaoImpl.java  # Implementación DAO
+                         │
+                         ├── 📄 data/
+                         │   └── 📑 DatosNotificacion.java          # DTO de notificación
+                         │
+                         ├── ⚠️ exception/
+                         │   ├── ❗ ApiClientException.java         # Error en API externa
+                         │   └── ❗ BusinessException.java          # Error de negocio
+                         │
+                         ├── 🌐 restclient/                         # Cliente(s) REST externos
+                         │
+                         ├── 🧭 service/
+                         │   ├── 📝 INotificacionesService.java     # Interfaz del servicio
+                         │   ├── 📢 NotificacionMasivaService.java  # Servicio de envíos masivos
+                         │   └── 📦 impl/
+                         │       └── 🚀 NotificacionesService.java  # Implementación principal
+                         │
+                         └── 🛠️ utils/
+                             ├── 🔥 FirebaseSDK.java                # Integración con Firebase
+                             └── 🧩 NotificacionesApplication.java  # Configuración global
+
+
 
 ```
